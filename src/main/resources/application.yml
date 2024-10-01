@@ -1,0 +1,67 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
+        spring:
+          security:
+            oauth2:
+              client:
+                registration:
+                  demo-transaction:
+                    client-id: demo-transaction
+                    client-secret: "{noop}secret"
+                    client-name: demo-transaction
+                    authorization-grant-type: authorization_code
+                    redirect-uri: http://localhost:8080/login/oauth2/code/demo-transaction
+                    scope: articles.read
+                provider:
+                  demo-provider:
+                    authorization-uri: http://localhost:9000/oauth2/authorize
+                    token-uri: http://localhost:9000/oauth2/token
+                    user-info-uri: http://localhost:9000/userinfo
+                    jwk-set-uri: http://localhost:9000/.well-known/jwks.json
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 21012891@st.phenikaa-uni.edu.vn
+    password: owuakxckyemdcotg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  application:
+    name: demo-transaction
+  datasource:
+    url: jdbc:mysql://localhost:3306/open_learn_hub
+    username: root
+    password: boquang321
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  server:
+    port: 8080
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      port: 6379
+      host: localhost
+
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          oauth2: trace

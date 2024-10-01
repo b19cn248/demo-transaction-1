@@ -1,0 +1,25 @@
+package com.opn.demo.config;
+
+import com.opn.demo.facade.TransactionMoneyFacade;
+import com.opn.demo.facade.impl.TransactionMoneyFacadeImpl;
+import com.opn.demo.service.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+
+@org.springframework.context.annotation.Configuration
+public class  Configuration {
+
+  @Bean
+  public TransactionMoneyFacade transactionMoneyFacade(UserService userService){
+    return new TransactionMoneyFacadeImpl(userService);
+  }
+
+
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+
+}
